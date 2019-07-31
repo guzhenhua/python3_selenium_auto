@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import random
 from selenium.webdriver.support.wait import WebDriverWait
 from  selenium.webdriver.common.by import By
 # driver=webdriver.Chrome()
@@ -19,11 +20,21 @@ from  selenium.webdriver.common.by import By
 # driver.quit()
 
 # 2-10 输入注册用户名字及获取用户信息
-driver=webdriver.Chrome()
-driver.get("http://www.5itest.cn/register")
-time.sleep(3)
-element=driver.find_element_by_id("register_email")
-print(element.get_attribute("placeholder"))
-element.send_keys("707016185@qq.com")
-#通过element.get_attribute("value")获取input输入的值
-print(element.get_attribute("value"))
+# driver=webdriver.Chrome()
+# driver.get("http://www.5itest.cn/register")
+# time.sleep(3)
+# element=driver.find_element_by_id("register_email")
+# print(element.get_attribute("placeholder"))
+# element.send_keys("707016185@qq.com")
+# #通过element.get_attribute("value")获取input输入的值
+# print(element.get_attribute("value"))
+
+#2-11 如何生成用户名和邮箱
+# 通过random生产出随机数，通过join把list转成字符串
+for i in range(5):
+    user_email=''.join(random.sample("1234567890",9))
+    print(user_email+"@qq.com")
+
+# 列表转换成字符串
+list=["zhangsan","lisi","wangwu"]
+print(''.join(list))
