@@ -5,6 +5,7 @@ import random
 from selenium.webdriver.support.wait import WebDriverWait
 from  selenium.webdriver.common.by import By
 from PIL import Image
+from ShowapiRequest import ShowapiRequest
 # driver=webdriver.Chrome()
 # # driver=webdriver.edge()
 # driver.get("http://www.5itest.cn/register")
@@ -49,17 +50,27 @@ from PIL import Image
 # 2.解析图片
 # 3.输入验证码
 # 保存图片，根据图片坐标扣取图片
-driver=webdriver.Chrome()
-driver.get("http://www.5itest.cn/register")
-time.sleep(3)
-driver.maximize_window()
-driver.save_screenshot("E:/screenshot.png")
-code_element=driver.find_element_by_id("getcode_num")
-print(code_element.location) #{"x":123,"y":456}
-left=code_element.location['x']
-top=code_element.location['y']
-right=code_element.size['width']+left
-height=code_element.size['height']+top
-im=Image.open("E:/screenshot.png")
-img=im.crop((left,top,right,height))
-img.save("E:/code_element.png")
+# driver=webdriver.Chrome()
+# driver.get("http://www.5itest.cn/register")
+# time.sleep(3)
+# driver.maximize_window()
+# driver.save_screenshot("E:/screenshot.png")
+# code_element=driver.find_element_by_id("getcode_num")
+# print(code_element.location) #{"x":123,"y":456}
+# left=code_element.location['x']
+# top=code_element.location['y']
+# right=code_element.size['width']+left
+# height=code_element.size['height']+top
+# im=Image.open("E:/screenshot.png")
+# img=im.crop((left,top,right,height))
+# img.save("E:/code_element.png")
+
+
+r = ShowapiRequest("http://route.showapi.com/184-4","62626","d61950be50dc4dbd9969f741b8e730f5" )
+r.addBodyPara("typeId", "35")
+r.addBodyPara("convert_to_jpg", "0")
+r.addFilePara("image", "E:/code_element.png") #文件上传时设置
+res = r.post()
+time.sleep(1)
+text = res.json()['showapi_res_body']['Result']
+print(text)
