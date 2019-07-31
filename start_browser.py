@@ -4,6 +4,7 @@ import time
 import random
 from selenium.webdriver.support.wait import WebDriverWait
 from  selenium.webdriver.common.by import By
+from PIL import Image
 # driver=webdriver.Chrome()
 # # driver=webdriver.edge()
 # driver.get("http://www.5itest.cn/register")
@@ -31,10 +32,34 @@ from  selenium.webdriver.common.by import By
 
 #2-11 如何生成用户名和邮箱
 # 通过random生产出随机数，通过join把list转成字符串
-for i in range(5):
-    user_email=''.join(random.sample("1234567890",9))
-    print(user_email+"@qq.com")
+# for i in range(5):
+#     user_email=''.join(random.sample("1234567890",9))
+#     print(user_email+"@qq.com")
+#
+# # 列表转换成字符串
+# list=["zhangsan","lisi","wangwu"]
+# print(''.join(list))
 
-# 列表转换成字符串
-list=["zhangsan","lisi","wangwu"]
-print(''.join(list))
+# 2-12 如何解决验证码思路
+# 1.设置万能验证码
+# 2.使用cookie绕过
+# 3.识别验证码（今天讲解）
+# 思路：
+# 1.保存图片，根据图片坐标扣取图片
+# 2.解析图片
+# 3.输入验证码
+# 保存图片，根据图片坐标扣取图片
+driver=webdriver.Chrome()
+driver.get("http://www.5itest.cn/register")
+time.sleep(3)
+driver.maximize_window()
+driver.save_screenshot("E:/screenshot.png")
+code_element=driver.find_element_by_id("getcode_num")
+print(code_element.location) #{"x":123,"y":456}
+left=code_element.location['x']
+top=code_element.location['y']
+right=code_element.size['width']+left
+height=code_element.size['height']+top
+im=Image.open("E:/screenshot.png")
+img=im.crop((left,top,right,height))
+img.save("E:/code_element.png")
