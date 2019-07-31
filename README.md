@@ -20,3 +20,9 @@ No matching distribution found for Pillow
 path是指下载的.whl文件存放的路径
 
 详细教程**PIL、Pillow安装使用方法**：https://blog.csdn.net/mp624183768/article/details/81023819
+
+
+
+
+
+图片识别APi：https://www.showapi.com/
