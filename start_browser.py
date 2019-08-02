@@ -66,7 +66,7 @@ from ShowapiRequest import ShowapiRequest
 # img.save("E:/code_element.png")
 
 
-r = ShowapiRequest("http://route.showapi.com/184-4","62626","d61950be50dc4dbd9969f741b8e730f5" )
+r = ShowapiRequest("http://route.showapi.com/184-4","101540","ba8f310cfe3444929f34a3cfcca8ed3e" )
 r.addBodyPara("typeId", "35")
 r.addBodyPara("convert_to_jpg", "0")
 r.addFilePara("image", "E:/code_element.png") #文件上传时设置
