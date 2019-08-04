@@ -19,9 +19,9 @@ class RegiterFunction(object):
         return driver
     # 输入用户信息
     def send_user_info(self,key,data):
-        self.get_user_info(key).send_keys(data)
+        self.get_element(key).send_keys(data)
     #定位元素
-    def get_user_info(self,key):
+    def get_element(self,key):
         find_element = FindElement(self.driver)
         return find_element.get_element(key)
     # 获取图片
@@ -63,7 +63,13 @@ def run_mian():
         # E: / screenshot.png
         captcha_code = register_function.image_online(file_name)
         register_function.send_user_info("user_captcha_code",captcha_code)
-        register_function.get_user_info("user_register_btn").click()
+        register_function.get_element("user_register_btn").click()
+        code_text=register_function.get_element("user_captcha_code_error")
+        if (code_text==None):
+            print("执行成功")
+        else:
+            register_function.driver.save_screenshot("E:/guzhenhua/code_error.png")
+            print("执行失败")
         time.sleep(3)
         register_function.driver.close()
 if __name__=="__main__":

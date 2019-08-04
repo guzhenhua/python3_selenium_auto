@@ -7,7 +7,10 @@ class FindElement(object):
         read_ini=Read_ini()
         by=read_ini.get_value(key).split("<")[1]
         local=read_ini.get_value(key).split("<")[0]
-        if by=="id":
-            return self.driver.find_element_by_id(local)
-        if by == "xpath":
-            return self.driver.find_element_by_Xpath(local)
+        try:
+            if by=="id":
+                return self.driver.find_element_by_id(local)
+            if by == "xpath":
+                return self.driver.find_element_by_Xpath(local)
+        except:
+            return None
