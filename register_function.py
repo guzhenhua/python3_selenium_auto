@@ -74,3 +74,4 @@ def run_mian():
         register_function.driver.close()
 if __name__=="__main__":
     run_mian()
+    print("执行失败")
